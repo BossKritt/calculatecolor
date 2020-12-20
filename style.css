@@ -4,7 +4,6 @@ body {
 }
 
 .card {
-  width: 50%;
   margin-top: 200px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -99,20 +98,23 @@ body {
   border: none;
 }
 
-/* @media only screen and (max-width: 700px) {
-  #myrank {
+/* mobile */
+@media only screen and (max-width: 400px) {
+  .card {
     width: 100%;
   }
 }
 
-@media only screen and (min-width: 701px) {
-  #myrank {
-    width: 85%;
-  }
-} */
-
-@media only screen and (max-width: 400px) {
+/* medium */
+@media only screen and (min-width: 768px) {
   .card {
-    width: auto;
+    width: 75%;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1200px) {
+  .card {
+    width: 50%;
   }
 }
