@@ -9,18 +9,27 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
-
-    <title>Calculate color with Lab values</title>
+    <script src="ConvertLab.js"></script>
+    <title>Calculate color with L*a*b values</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class=container>
+    <div class=container-fluid>
+        <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="width: 48px">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="card mx-auto">
             <div class="card-header" style="text-align: center;">
-                <h4>โปรแกรมคำนวณค่าสีจาก LAB</h4>
+                <h4>โปรแกรมคำนวณค่าสีจาก L*a*b</h4>
             </div>
             <div class="card-body">
                 <div class="text-muted">
@@ -28,174 +37,81 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4" style="margin-top: 10px;">
-                        <input type="text" class="form-control" placeholder="L" name="lvalue">
+                        <input type="text" class="form-control" placeholder="L" name="lvalue" id="lvalue">
                     </div>
                     <div class="col-md-4" style="margin-top: 10px;">
-                        <input type="text" class="form-control" placeholder="a" name="avalue">
+                        <input type="text" class="form-control" placeholder="a" name="avalue" id="avalue">
                     </div>
                     <div class="col-md-4" style="margin-top: 10px;">
-                        <input type="text" class="form-control" placeholder="b" name="bvalue">
+                        <input type="text" class="form-control" placeholder="b" name="bvalue" id="bvalue">
                     </div>
                     <!--check-->
                     <div class="col" style="margin-top: 10px;">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1"
-                                value="ka">
+                            <input class="form-check-input" type="checkbox" name="CheckKa" id="CheckKa" value="ka">
                             <label class="form-check-label" for="inlineRadio1">ka</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio2"
-                                value="kw">
+                            <input class="form-check-input" type="checkbox" name="CheckKw" id="CheckKw" value="kw">
                             <label class="form-check-label" for="inlineRadio2">kw</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio2"
-                                value="ki">
+                            <input class="form-check-input" type="checkbox" name="CheckKi" id="CheckKi" value="ki">
                             <label class="form-check-label" for="inlineRadio2">ki</label>
                         </div>
                     </div>
                     <!--button-->
                     <div class="d-grid gap-2" style="margin-top: 10px;">
-                        <button onclick="showrank()" class="btn btn-primary" type="submit">ตกลง</button>
+                        <button onclick="myFunction();" class="btn btn-primary" type="submit">ตกลง</button>
                     </div>
-                    <!--rank-->
-                    <div id="myrank" style="display: none;">
-                        <table class="styled-table table table-hover">
-                            <thead>
-                                <tr style="text-align: center;">
-                                    <th>Rank</th>
-                                    <th>L</th>
-                                    <th>a</th>
-                                    <th>b</th>
-                                    <th>CMYK</th>
-                                </tr>
-                            </thead>
-                            <tbody style="text-align: center;">
-                                <tr>
-                                    <td>1</td>
-                                    <td>0.5</td>
-                                    <td>1</td>
-                                    <td>1.5</td>
-                                    <td>
-                                        <div class="rectangle mx-auto" style="background-color: blue;">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>1</td>
-                                    <td>1.5</td>
-                                    <td>2</td>
-                                    <td>
-                                        <div class="rectangle mx-auto" style="background-color: gray;">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>3</td>
-                                    <td>3.5</td>
-                                    <td>1.5</td>
-                                    <td>
-                                        <div class="rectangle mx-auto" style="background-color: pink;">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>1.5</td>
-                                    <td>8</td>
-                                    <td>
-                                        <div class="rectangle mx-auto" style="background-color: purple;">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>6.5</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>
-                                        <div class="rectangle mx-auto" style="background-color: black;">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>10</td>
-                                    <td>1.589</td>
-                                    <td>2</td>
-                                    <td>
-                                        <div class="rectangle mx-auto" style="background-color: green;">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>0.5</td>
-                                    <td>1.357</td>
-                                    <td>1.5</td>
-                                    <td>
-                                        <div class="rectangle mx-auto" style="background-color: yellow;">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>4</td>
-                                    <td>1.245</td>
-                                    <td>5</td>
-                                    <td>
-                                        <div class="rectangle mx-auto" style="background-color: red;">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>4.5</td>
-                                    <td>1.099</td>
-                                    <td>1.785</td>
-                                    <td>
-                                        <div class="rectangle mx-auto" style="background-color: orange;">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>9.65</td>
-                                    <td>3.45</td>
-                                    <td>2.34</td>
-                                    <td>
-                                        <div class="rectangle mx-auto" style="background-color: royalblue;">
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="width: 48px">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only"></span>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!--output-->
+        <div class="card mx-auto" id="myrank" style="display: none;">
+            <div class="p-3">
+                <div class="table-responsive">
+                    <!--tableka-->
+                    <table class="styled-table table table-hover table1" id="myTable1">
+                        <thead>
+                        </thead>
+                        <tbody style="text-align: center;">
+                        </tbody>
+                    </table>
+                    <!--tablekw-->
+                    <table class="styled-table table table-hover table2" id="myTable2">
+                        <thead>
+                        </thead>
+                        <tbody style="text-align: center;">
+                        </tbody>
+                    </table>
+                    <!--tableki-->
+                    <table class="styled-table table table-hover table3" id="myTable3">
+                        <thead>
+                        </thead>
+                        <tbody style="text-align: center;">
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
     <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
-    <script>
-        function showrank() {
-            var rank = document.getElementById("myrank");
-            if (rank.style.display === "none") {
-                rank.style.display = "block";
-            } else {
-                rank.style.display = "none";
-            }
-        }
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 
 </html>
