@@ -92,7 +92,6 @@ function cmyk2rgb(c, m, y, k, normalized) {
         g = Math.round(255 * g);
         b = Math.round(255 * b);
     }
-    // console.log(r, g, b)
     return {
         r: r,
         g: g,
@@ -101,16 +100,37 @@ function cmyk2rgb(c, m, y, k, normalized) {
 }
 
 function myDeleteFunction() {
-    for (let i = 0; i < 12; i++) {
-        document.getElementById("myTable1").deleteRow(0);
-        document.getElementById("myTable2").deleteRow(0);
-        document.getElementById("myTable3").deleteRow(0);
+    let mytable1 = document.getElementById("myTable1").getElementsByTagName("th");
+    let mytable2 = document.getElementById("myTable2").getElementsByTagName("th");
+    let mytable3 = document.getElementById("myTable3").getElementsByTagName("th");
+    if (mytable1 != 0) {
+        for (let i = 0; i < 12; i++) {
+            document.getElementById("myTable1").deleteRow(0);
+            if (!document.getElementById("myTable1").getElementsByTagName("td")) {
+                break;
+            }
+        }
+    }
+    if (mytable2 != 0) {
+        for (let i = 0; i < 12; i++) {
+            document.getElementById("myTable2").deleteRow(0);
+            if (mytable2 == 0) {
+                break;
+            }
+        }
+    }
+    if (mytable3 != 0) {
+        for (let i = 0; i < 12; i++) {
+            document.getElementById("myTable3").deleteRow(0);
+            if (mytable3 == 0) {
+                break;
+            }
+        }
     }
 }
 
 function myFunction() {
     var rank = document.getElementById("myrank");
-    // console.log(rank.style.display)
     if (rank.style.display === "block") {
         rank.style.display = "none";
         myDeleteFunction();
@@ -121,16 +141,13 @@ function myFunction() {
     var inputL = document.getElementById("lvalue").value;
     var inputA = document.getElementById("avalue").value;
     var inputB = document.getElementById("bvalue").value;
-    // console.log("L" + inputL + "  A" + inputA + " B" + inputB);
     modal();
 
     // show ka kw ki
     if (checkBoxKa.checked && checkBoxKw.checked && checkBoxKi.checked == true) {
-        // console.log(dataSortKi);
 
         for (let i = 1; i <= dataKa.length; i++) {
             if (i === dataKa.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKa[i].__EMPTY) === true) {
@@ -138,14 +155,12 @@ function myFunction() {
                 var total = { C: dataKa[i].__EMPTY, M: dataKa[i].__EMPTY_1, Y: dataKa[i].__EMPTY_2, K: dataKa[i].__EMPTY_3, L2: dataKa[i].__EMPTY_4, A2: dataKa[i].__EMPTY_5, B2: dataKa[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKa.push(total);
-                // console.log("Ka" + dataKa[i].__EMPTY);
             }
         }
         dataSortKa = ArrKa.sort(compare);
 
         for (let i = 1; i <= dataKw.length; i++) {
             if (i === dataKw.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKw[i].__EMPTY) === true) {
@@ -153,14 +168,12 @@ function myFunction() {
                 var total = { C: dataKw[i].__EMPTY, M: dataKw[i].__EMPTY_1, Y: dataKw[i].__EMPTY_2, K: dataKw[i].__EMPTY_3, L2: dataKw[i].__EMPTY_4, A2: dataKw[i].__EMPTY_5, B2: dataKw[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKw.push(total);
-                // console.log("Kw" + dataKw[i].__EMPTY);
             }
         }
         dataSortKw = ArrKw.sort(compare);
 
         for (let i = 1; i <= dataKi.length; i++) {
             if (i === dataKi.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKi[i].__EMPTY) === true) {
@@ -168,13 +181,10 @@ function myFunction() {
                 var total = { C: dataKi[i].__EMPTY, M: dataKi[i].__EMPTY_1, Y: dataKi[i].__EMPTY_2, K: dataKi[i].__EMPTY_3, L2: dataKi[i].__EMPTY_4, A2: dataKi[i].__EMPTY_5, B2: dataKi[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKi.push(total);
-                // console.log("Ki" + dataKi[i].__EMPTY);
             }
         }
         dataSortKi = ArrKi.sort(compare);
-        // console.log(dataSortKi);
         setTimeout(function () {
-            // console.log('hejsan');
             $('.modal').modal('hide');
         }, 1500);
 
@@ -290,7 +300,6 @@ function myFunction() {
     else if (checkBoxKa.checked && checkBoxKw.checked == true) {
         for (let i = 1; i <= dataKa.length; i++) {
             if (i === dataKa.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKa[i].__EMPTY) === true) {
@@ -298,15 +307,12 @@ function myFunction() {
                 var total = { C: dataKa[i].__EMPTY, M: dataKa[i].__EMPTY_1, Y: dataKa[i].__EMPTY_2, K: dataKa[i].__EMPTY_3, L2: dataKa[i].__EMPTY_4, A2: dataKa[i].__EMPTY_5, B2: dataKa[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKa.push(total);
-                // console.log(i);
-                // console.log(cal);
             }
         }
         dataSortKa = ArrKa.sort(compare);
 
         for (let i = 1; i <= dataKw.length; i++) {
             if (i === dataKw.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKw[i].__EMPTY) === true) {
@@ -314,16 +320,13 @@ function myFunction() {
                 var total = { C: dataKw[i].__EMPTY, M: dataKw[i].__EMPTY_1, Y: dataKw[i].__EMPTY_2, K: dataKw[i].__EMPTY_3, L2: dataKw[i].__EMPTY_4, A2: dataKw[i].__EMPTY_5, B2: dataKw[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKw.push(total);
-                // console.log("Kw" + dataKw[i].__EMPTY);
             }
 
         }
         dataSortKw = ArrKw.sort(compare);
         setTimeout(function () {
-            // console.log('hejsan');
             $('.modal').modal('hide');
         }, 1500);
-        // console.log(dataSort);
 
         //get table head;
         var tableRef = document.getElementById('myTable1').getElementsByTagName('thead')[0];
@@ -403,7 +406,6 @@ function myFunction() {
     else if (checkBoxKa.checked && checkBoxKi.checked == true) {
         for (let i = 1; i <= dataKa.length; i++) {
             if (i === dataKa.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKa[i].__EMPTY) === true) {
@@ -411,15 +413,12 @@ function myFunction() {
                 var total = { C: dataKa[i].__EMPTY, M: dataKa[i].__EMPTY_1, Y: dataKa[i].__EMPTY_2, K: dataKa[i].__EMPTY_3, L2: dataKa[i].__EMPTY_4, A2: dataKa[i].__EMPTY_5, B2: dataKa[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKa.push(total);
-                // console.log(i);
-                // console.log(cal);
             }
         }
         dataSortKa = ArrKa.sort(compare);
 
         for (let i = 1; i <= dataKi.length; i++) {
             if (i === dataKi.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKi[i].__EMPTY) === true) {
@@ -427,12 +426,10 @@ function myFunction() {
                 var total = { C: dataKi[i].__EMPTY, M: dataKi[i].__EMPTY_1, Y: dataKi[i].__EMPTY_2, K: dataKi[i].__EMPTY_3, L2: dataKi[i].__EMPTY_4, A2: dataKi[i].__EMPTY_5, B2: dataKi[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKi.push(total);
-                // console.log("Ki" + dataKi[i].__EMPTY);
             }
         }
         dataSortKi = ArrKi.sort(compare);
         setTimeout(function () {
-            // console.log('hejsan');
             $('.modal').modal('hide');
         }, 1500);
         var tableRef = document.getElementById('myTable1').getElementsByTagName('thead')[0];
@@ -512,7 +509,6 @@ function myFunction() {
     else if (checkBoxKw.checked && checkBoxKi.checked == true) {
         for (let i = 1; i <= dataKw.length; i++) {
             if (i === dataKw.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKw[i].__EMPTY) === true) {
@@ -520,7 +516,6 @@ function myFunction() {
                 var total = { C: dataKw[i].__EMPTY, M: dataKw[i].__EMPTY_1, Y: dataKw[i].__EMPTY_2, K: dataKw[i].__EMPTY_3, L2: dataKw[i].__EMPTY_4, A2: dataKw[i].__EMPTY_5, B2: dataKw[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKw.push(total);
-                // console.log("Kw" + dataKw[i].__EMPTY);
             }
 
         }
@@ -528,7 +523,6 @@ function myFunction() {
 
         for (let i = 1; i <= dataKi.length; i++) {
             if (i === dataKi.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKi[i].__EMPTY) === true) {
@@ -536,12 +530,10 @@ function myFunction() {
                 var total = { C: dataKi[i].__EMPTY, M: dataKi[i].__EMPTY_1, Y: dataKi[i].__EMPTY_2, K: dataKi[i].__EMPTY_3, L2: dataKi[i].__EMPTY_4, A2: dataKi[i].__EMPTY_5, B2: dataKi[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKi.push(total);
-                // console.log("Ki" + dataKi[i].__EMPTY);
             }
         }
         dataSortKi = ArrKi.sort(compare);
         setTimeout(function () {
-            // console.log('hejsan');
             $('.modal').modal('hide');
         }, 1500);
 
@@ -622,7 +614,6 @@ function myFunction() {
     else if (checkBoxKa.checked == true) {
         for (let i = 1; i <= dataKa.length; i++) {
             if (i === dataKa.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKa[i].__EMPTY) === true) {
@@ -630,13 +621,10 @@ function myFunction() {
                 var total = { C: dataKa[i].__EMPTY, M: dataKa[i].__EMPTY_1, Y: dataKa[i].__EMPTY_2, K: dataKa[i].__EMPTY_3, L2: dataKa[i].__EMPTY_4, A2: dataKa[i].__EMPTY_5, B2: dataKa[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKa.push(total);
-                // console.log(i);
-                // console.log(cal);
             }
         }
         dataSortKa = ArrKa.sort(compare);
         setTimeout(function () {
-            // console.log('hejsan');
             $('.modal').modal('hide');
         }, 1500);
 
@@ -684,7 +672,6 @@ function myFunction() {
     else if (checkBoxKw.checked == true) {
         for (let i = 1; i <= dataKw.length; i++) {
             if (i === dataKw.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKw[i].__EMPTY) === true) {
@@ -692,13 +679,11 @@ function myFunction() {
                 var total = { C: dataKw[i].__EMPTY, M: dataKw[i].__EMPTY_1, Y: dataKw[i].__EMPTY_2, K: dataKw[i].__EMPTY_3, L2: dataKw[i].__EMPTY_4, A2: dataKw[i].__EMPTY_5, B2: dataKw[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKw.push(total);
-                // console.log("Kw" + dataKw[i].__EMPTY);
             }
 
         }
         dataSortKw = ArrKw.sort(compare);
         setTimeout(function () {
-            // console.log('hejsan');
             $('.modal').modal('hide');
         }, 1500);
         var tableRef = document.getElementById('myTable1').getElementsByTagName('thead')[0];
@@ -746,7 +731,6 @@ function myFunction() {
     else if (checkBoxKi.checked == true) {
         for (let i = 1; i <= dataKi.length; i++) {
             if (i === dataKi.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKi[i].__EMPTY) === true) {
@@ -754,12 +738,10 @@ function myFunction() {
                 var total = { C: dataKi[i].__EMPTY, M: dataKi[i].__EMPTY_1, Y: dataKi[i].__EMPTY_2, K: dataKi[i].__EMPTY_3, L2: dataKi[i].__EMPTY_4, A2: dataKi[i].__EMPTY_5, B2: dataKi[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKi.push(total);
-                // console.log("Ki" + dataKi[i].__EMPTY);
             }
         }
         dataSortKi = ArrKi.sort(compare);
         setTimeout(function () {
-            // console.log('hejsan');
             $('.modal').modal('hide');
         }, 1500);
         var tableRef = document.getElementById('myTable1').getElementsByTagName('thead')[0];
@@ -807,7 +789,6 @@ function myFunction() {
     else {
         for (let i = 1; i <= dataKa.length; i++) {
             if (i === dataKa.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKa[i].__EMPTY) === true) {
@@ -815,14 +796,12 @@ function myFunction() {
                 var total = { C: dataKa[i].__EMPTY, M: dataKa[i].__EMPTY_1, Y: dataKa[i].__EMPTY_2, K: dataKa[i].__EMPTY_3, L2: dataKa[i].__EMPTY_4, A2: dataKa[i].__EMPTY_5, B2: dataKa[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKa.push(total);
-                // console.log("Ka" + dataKa[i].__EMPTY);
             }
         }
         dataSortKa = ArrKa.sort(compare);
 
         for (let i = 1; i <= dataKw.length; i++) {
             if (i === dataKw.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKw[i].__EMPTY) === true) {
@@ -830,14 +809,12 @@ function myFunction() {
                 var total = { C: dataKw[i].__EMPTY, M: dataKw[i].__EMPTY_1, Y: dataKw[i].__EMPTY_2, K: dataKw[i].__EMPTY_3, L2: dataKw[i].__EMPTY_4, A2: dataKw[i].__EMPTY_5, B2: dataKw[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKw.push(total);
-                // console.log("Kw" + dataKw[i].__EMPTY);
             }
         }
         dataSortKw = ArrKw.sort(compare);
 
         for (let i = 1; i <= dataKi.length; i++) {
             if (i === dataKi.length) {
-                // console.log("break");
                 break;
             }
             else if (!isNaN(dataKi[i].__EMPTY) === true) {
@@ -845,21 +822,19 @@ function myFunction() {
                 var total = { C: dataKi[i].__EMPTY, M: dataKi[i].__EMPTY_1, Y: dataKi[i].__EMPTY_2, K: dataKi[i].__EMPTY_3, L2: dataKi[i].__EMPTY_4, A2: dataKi[i].__EMPTY_5, B2: dataKi[i].__EMPTY_6 };
                 total.dataE = cal;
                 ArrKi.push(total);
-                // console.log("Ki" + dataKi[i].__EMPTY);
             }
         }
         dataSortKi = ArrKi.sort(compare);
-        // console.log(dataSortKi);
         setTimeout(function () {
-            // console.log('hejsan');
             $('.modal').modal('hide');
         }, 1500);
+        var tableRef = document.getElementById('myTable1').getElementsByTagName('thead')[0];
 
         //insert Row
         tableRef.insertRow().innerHTML =
             '<th colspan="6">Ka</th>';
         tableRef.insertRow().innerHTML =
-            '<th scope="col">Rank</th>' +
+            '<th scope="col" style="position: sticky; left:0; background-color:#0d6efd">Rank</th>' +
             '<th scope="col">L</th>' +
             '<th scope="col">A</th>' +
             '<th scope="col">B</th>' +
@@ -882,11 +857,13 @@ function myFunction() {
                 '(' + dataSortKa[index].C + ',' + dataSortKa[index].M + ',' + dataSortKa[index].Y + ',' + dataSortKa[index].K + ')' + "</td>";
         }
 
+        var tableRef = document.getElementById('myTable2').getElementsByTagName('thead')[0];
+
         //insert Row
         tableRef.insertRow().innerHTML =
-            '<th colspan="6">Ka</th>';
+            '<th colspan="6">Kw</th>';
         tableRef.insertRow().innerHTML =
-            '<th scope="col">Rank</th>' +
+            '<th scope="col" style="position: sticky; left:0; background-color:#198754">Rank</th>' +
             '<th scope="col">L</th>' +
             '<th scope="col">A</th>' +
             '<th scope="col">B</th>' +
@@ -909,11 +886,13 @@ function myFunction() {
                 '(' + dataSortKw[index].C + ',' + dataSortKw[index].M + ',' + dataSortKw[index].Y + ',' + dataSortKw[index].K + ')' + "</td>";
         }
 
+        var tableRef = document.getElementById('myTable3').getElementsByTagName('thead')[0];
+
         //insert Row
         tableRef.insertRow().innerHTML =
-            '<th colspan="6">Ka</th>';
+            '<th colspan="6">Ki</th>';
         tableRef.insertRow().innerHTML =
-            '<th scope="col">Rank</th>' +
+            '<th scope="col" style="position: sticky; left:0; background-color:#dc3545">Rank</th>' +
             '<th scope="col">L</th>' +
             '<th scope="col">A</th>' +
             '<th scope="col">B</th>' +
